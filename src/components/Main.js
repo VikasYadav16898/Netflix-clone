@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MovieGallery from "./MovieGallery";
 import axios from "axios";
-import { movieTrendList, imageURL } from "../api";
+import { movieTrendList, imageURL, genres } from "../api";
 import Carousel from "react-elastic-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import { Carousel } from "react-responsive-carousel";
 import CarousalMain from "./CarousalMain";
+import MovieListSlider from "./MovieListSlider";
+import { logDOM } from "@testing-library/react";
 
 export default function Main() {
   const [TrendMovieList, setTrendMovieList] = useState([]);
+  const [Genres, setGenres] = useState([]);
   //Getting Data
-  axios
-    .get(movieTrendList)
-    .then((data) => setTrendMovieList(data.data.results));
+  useEffect(() => {
+    axios
+      .get(movieTrendList)
+      .then((data) => setTrendMovieList(data.data.results));
 
+    axios.get(genres).then((data) => setGenres(data.data.genres));
+  }, []);
+
+  console.log(Genres);
   //Handlers
 
   return (
@@ -32,22 +39,24 @@ export default function Main() {
           ))}
         </Carousel>
       </StyledHeaderCorousel>
-      <div>
-        <h2>Trending</h2>
+      <div
+        style={{
+          boxShadow: "0px -5px 10px red",
+          zIndex: "10",
+          borderRadius: "2rem",
+          overflow: "hidden",
+          padding: "1rem 0.5rem",
+        }}
+      >
+        {Genres.map((genre) => (
+          <MovieListSlider
+            genre={genre.name}
+            genreId={genre.id}
+            key={genre.id}
+            movieList={TrendMovieList}
+          />
+        ))}
       </div>
-      <StyledMovieList>
-        <Carousel itemsToShow={8} itemsToScroll={4} pagination={false}>
-          {TrendMovieList.map((movie) => (
-            <MovieGallery
-              url={imageURL + movie.poster_path}
-              id={movie.id}
-              key={movie.id}
-              title={movie.title}
-              description={movie.overview}
-            />
-          ))}
-        </Carousel>
-      </StyledMovieList>
     </div>
   );
 }
@@ -56,21 +65,4 @@ const StyledHeaderCorousel = styled.div`
   background: #2b2a2a;
   height: 70vh;
   width: 100%;
-`;
-
-const StyledMovieList = styled.div`
-  background: skyblue;
-  height: 100%;
-  width: 100%;
-  z-index: 2;
-  display: flex;
-`;
-const StyledMovieListContainer = styled.div`
-  overflow: hidden;
-`;
-
-const StyledCarousel = styled(Carousel)``;
-
-const StyledMovieInfo = styled.div`
-  background: transparent;
 `;

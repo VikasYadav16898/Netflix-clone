@@ -23,6 +23,7 @@ const StyledCarousalMain = styled.div`
   padding: 1rem;
   position: relative;
   border-radius: 2rem;
+  cursor: pointer;
   .image-container {
     height: 100%;
     width: 100%;
