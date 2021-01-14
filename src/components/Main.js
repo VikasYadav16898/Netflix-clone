@@ -7,11 +7,12 @@ import Carousel from "react-elastic-carousel";
 // import { Carousel } from "react-responsive-carousel";
 import CarousalMain from "./CarousalMain";
 import MovieListSlider from "./MovieListSlider";
-import { logDOM } from "@testing-library/react";
+import MovieDescription from "./MovieDescription";
 
 export default function Main() {
   const [TrendMovieList, setTrendMovieList] = useState([]);
   const [Genres, setGenres] = useState([]);
+  const [selectedMovie, setselectedMovie] = useState("");
   //Getting Data
   useEffect(() => {
     axios
@@ -21,11 +22,26 @@ export default function Main() {
     axios.get(genres).then((data) => setGenres(data.data.genres));
   }, []);
 
-  console.log(Genres);
   //Handlers
 
+  console.log(selectedMovie);
+
+  if (selectedMovie !== "") {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "scroll";
+  }
+
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {selectedMovie === "" ? (
+        ""
+      ) : (
+        <MovieDescription
+          movieId={selectedMovie}
+          setselectedMovie={setselectedMovie}
+        />
+      )}
       <StyledHeaderCorousel>
         <Carousel outerSpacing={0} pagination={false} enableAutoPlay={true}>
           {TrendMovieList.map((movie) => (
@@ -35,6 +51,7 @@ export default function Main() {
               imgSrc={imageURL + movie.poster_path}
               id={movie.id}
               key={movie.id}
+              setselectedMovie={setselectedMovie}
             />
           ))}
         </Carousel>
@@ -54,6 +71,7 @@ export default function Main() {
             genreId={genre.id}
             key={genre.id}
             movieList={TrendMovieList}
+            setselectedMovie={setselectedMovie}
           />
         ))}
       </div>

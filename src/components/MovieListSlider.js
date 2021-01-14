@@ -7,13 +7,14 @@ import { base_url, API_KEY } from "../api";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function MovieListSlider({ genre, genreId }) {
+export default function MovieListSlider({ genre, genreId, setselectedMovie }) {
   const [movieList, setmovieList] = useState([]);
   useEffect(() => {
     axios.get(base_url + "list/" + genreId + API_KEY).then((data) => {
       setmovieList(data.data.items);
     });
   }, []);
+
   return (
     movieList.length > 8 && (
       <StyledMovieListSlider>
@@ -32,6 +33,7 @@ export default function MovieListSlider({ genre, genreId }) {
                 key={movie.id}
                 title={movie.title}
                 description={movie.overview}
+                setselectedMovie={setselectedMovie}
               />
             ))}
           </Carousel>

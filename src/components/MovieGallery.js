@@ -1,9 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function MovieGallery({ url }) {
+export default function MovieGallery({
+  url,
+  id,
+  title,
+  description,
+  setselectedMovie,
+}) {
   return (
-    <StyledCard>
+    <StyledCard
+      url={url}
+      id={id}
+      title={title}
+      description={description}
+      onClick={(e) => {
+        setselectedMovie(id);
+      }}
+    >
       <img src={url} alt="Image" />
     </StyledCard>
   );

@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import five from "../imgs/five.jpg";
-import Carousel from "react-elastic-carousel";
 
-export default function CarousalMain({ title, description, imgSrc, id }) {
+export default function CarousalMain({
+  title,
+  description,
+  imgSrc,
+  id,
+  setselectedMovie,
+}) {
   return (
-    <StyledCarousalMain>
+    <StyledCarousalMain onClick={() => setselectedMovie(id)}>
       <div className="info">
         <h1>{title ? title : "Title not Available."}</h1>
         <h3>{description.slice(0, 350)}...</h3>
