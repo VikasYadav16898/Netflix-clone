@@ -18,7 +18,7 @@ export default function MovieGallery({
         setselectedMovie(id);
       }}
     >
-      <img src={url} alt="Image" />
+      <img src={url} alt={url} />
     </StyledCard>
   );
 }

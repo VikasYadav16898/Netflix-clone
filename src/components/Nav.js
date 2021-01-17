@@ -9,8 +9,8 @@ export default function Nav() {
           <h2>Netflix</h2>
         </div>
         <ul>
-          <li>Contact</li>
-          <li>Vikas</li>
+          <li>Empty</li>
+          <li>User</li>
         </ul>
       </StyledNav>
     </div>

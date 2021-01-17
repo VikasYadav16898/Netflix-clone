@@ -49,12 +49,15 @@ const StyledCarousalMain = styled.div`
     text-shadow: 2px 2px black;
     overflow: hidden;
     h1 {
-      font-size: 6rem;
+      font-size: 6vw;
     }
     h3 {
       color: white;
       text-shadow: 2px 2px black;
       font-weight: lighter;
+      @media (max-width: 800px) {
+        display: none;
+      }
     }
   }
 `;

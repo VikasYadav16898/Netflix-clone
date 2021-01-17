@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
         background: #2b2a2a;
     }
     
+    
 `;
 
 export default GlobalStyle;
