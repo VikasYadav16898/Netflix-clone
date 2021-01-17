@@ -3,8 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 import { movieTrendList, imageURL, genres } from "../api";
 import Carousel, { consts } from "react-elastic-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { Carousel } from "react-responsive-carousel";
 import CarousalMain from "./CarousalMain";
 import MovieListSlider from "./MovieListSlider";
 import MovieDescription from "./MovieDescription";

@@ -11,15 +11,16 @@ import { descriptionAnimation } from "../animations";
 export default function MovieDescription({ movieId, setselectedMovie }) {
   const [movie, setmovie] = useState(null);
 
+  const getData = () => {
+    axios
+      .get(
+        base_url + "movie/" + movieId + API_KEY + "&append_to_response=videos"
+      )
+      .then((data) => setmovie(data.data))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
-    const getData = () => {
-      axios
-        .get(
-          base_url + "movie/" + movieId + API_KEY + "&append_to_response=videos"
-        )
-        .then((data) => setmovie(data.data))
-        .catch((err) => console.log(err));
-    };
     getData();
   }, []);
 
